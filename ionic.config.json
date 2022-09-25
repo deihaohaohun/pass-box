@@ -1,0 +1,7 @@
+{
+  "name": "passBox",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
