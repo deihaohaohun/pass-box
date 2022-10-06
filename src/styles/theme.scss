@@ -1,0 +1,11 @@
+// @media (prefers-color-scheme: dark) {
+//   .van-grid-item__content--center {
+//     background-color: #000 !important;
+//   }
+// }
+
+body.dark {
+  .van-grid-item__content--center {
+    background-color: #000 !important;
+  }
+}

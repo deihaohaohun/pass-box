@@ -1,32 +1,53 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router';
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-import { IonicVue } from '@ionic/vue';
+import { IonicVue } from "@ionic/vue";
 
 /* Core CSS required for Ionic components to work properly */
-import '@ionic/vue/css/core.css';
+import "@ionic/vue/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-import '@ionic/vue/css/normalize.css';
-import '@ionic/vue/css/structure.css';
-import '@ionic/vue/css/typography.css';
+import "@ionic/vue/css/normalize.css";
+import "@ionic/vue/css/structure.css";
+import "@ionic/vue/css/typography.css";
 
 /* Optional CSS utils that can be commented out */
-import '@ionic/vue/css/padding.css';
-import '@ionic/vue/css/float-elements.css';
-import '@ionic/vue/css/text-alignment.css';
-import '@ionic/vue/css/text-transformation.css';
-import '@ionic/vue/css/flex-utils.css';
-import '@ionic/vue/css/display.css';
+import "@ionic/vue/css/padding.css";
+import "@ionic/vue/css/float-elements.css";
+import "@ionic/vue/css/text-alignment.css";
+import "@ionic/vue/css/text-transformation.css";
+import "@ionic/vue/css/flex-utils.css";
+import "@ionic/vue/css/display.css";
 
 /* Theme variables */
-import './theme/variables.css';
+import "./theme/variables.css";
+import "./styles/theme.scss";
+import "vant/lib/index.css";
+import { Grid, GridItem, Button } from "vant";
+import { createPinia } from "pinia";
 
-const app = createApp(App)
-  .use(IonicVue)
-  .use(router);
-  
+const app = createApp(App).use(IonicVue).use(router);
+
+app.use(Grid);
+app.use(GridItem);
+app.use(Button);
+app.use(createPinia());
+
 router.isReady().then(() => {
-  app.mount('#app');
+  app.mount("#app");
 });
+
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+// Listen for changes to the prefers-color-scheme media query
+prefersDark.addListener(e => checkToggle());
+
+if (prefersDark.matches) {
+  checkToggle();
+}
+
+// Called by the media query to check/uncheck the toggle
+function checkToggle() {
+  document.body.classList.toggle("dark");
+}
